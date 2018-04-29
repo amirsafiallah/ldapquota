@@ -40,7 +40,7 @@ int read_ldap_quota(char *str, struct ldap_quota *a) {
     char *p = strchr(str, ':'); //find `:` character
     if (p == NULL) return 0;
     *(p) = '\0';
-    strcpy(a->fs, trim(str)); //trim any whitespace before and after FS path
+    strncpy(a->fs, trim(str), sizeof(a->fs)); //trim any whitespace before and after FS path
 
     int r = sscanf(p + 1,
                    " %lu , %lu , %lu , %lu ",
