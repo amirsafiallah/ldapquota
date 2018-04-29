@@ -12,7 +12,7 @@ Change the following parameter, compile then run:
 
 Useful Resources
 ----------------
-an example of an LDAP synchronous search using an LDAP API
+An example of an LDAP synchronous search using an LDAP API
 https://gist.github.com/syzdek/1459007
 
 OpenLDAP Manual Pages
