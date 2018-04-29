@@ -5,7 +5,7 @@
 #include <ctype.h>
 
 struct ldap_quota {
-    char fs[256]; //File System
+    char fs[BUFSIZ]; //File System
     u_int64_t quotaBhardlimit; //Blocks Hard Limit
     u_int64_t quotaBsoftlimit; //Blocks Soft Limit
     u_int64_t quotaIhardlimit; //INodes Hard Limit
@@ -36,6 +36,7 @@ int read_ldap_quota(char *str, struct ldap_quota *a) {
     //read (FileSystem:BlocksSoft,BlocksHard,InodesSoft,InodesHard) from quota attribute
     //this format is used on quota.schema
 
+    a->fs[0] = '\0';
     char *p = strchr(str, ':'); //find `:` character
     if (p == NULL) return 0;
     *(p) = '\0';
@@ -65,7 +66,8 @@ int main() {
     int err;
     LDAPMessage *res;
 
-    if (ldap_initialize(&LDAP, url) != LDAP_SUCCESS) {
+    err = ldap_initialize(&LDAP, url);
+    if (err != LDAP_SUCCESS) {
         fprintf(stderr, "ldap_initialize(): %s\n", ldap_err2string(err));
         return err;
     }
