@@ -1,6 +1,6 @@
 LDAP Quota
 ==========
-This source code written in C reads quota attirbute from ldap.
+This source code written in C reads quota attribute from ldap.
 
 How to Use
 ----------
